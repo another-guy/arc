@@ -24,10 +24,14 @@ The productivity boost will be achieved by AI-enabling the workspace.
 
 ## Work Environment and Constraints
 
+### Organizational Context
+
 The end solution (Claude Code plugin) should support various work environments, including but not limited to:
 - Government agencies, cautious about AI, security, and compliance.
 - Large (enterprise) private sector companies, which may have strict policies and legacy systems.
 - More AI-friendly companies, such as startups or tech companies, which may be more open to adopting new tools and practices, but still very careful about security and compliance, especially PHI handling when it comes to healthcare sector.
+
+### Role Diversity
 
 The end solution should also support performing tasks typical to various roles, including but not limited to:
 - **Often** Full-stack software engineer ("generalist" SWE/SDE).
@@ -36,6 +40,21 @@ The end solution should also support performing tasks typical to various roles, 
 - **Periodically** Site reliability engineer (SRE) and DevOps software engineer.
 - **Seldom** data engineer or data scientist.
 - **Seldom** product, project, or software engineer manager.
+
+### Technical and Other Differences
+
+The solution should be flexible enough to easily adapt to differences between companies', while still providing significant productivity benefits.
+The differences may include, but are not limited to:
+- Technical differences:
+  - Tech stacks (mainly Node.js, Python, React, Vue.js, .NET, C#, TypeScript, and others).
+  - Architectural patterns and styles (DDD, microservices, event-driven, serverless, monolith, layered, etc.)
+  - Platforms (mainly AWS, Azure, on-premises).
+  - CI/CD tools and pipelines (mainly GitHub Actions, Azure DevOps, and others).
+  - Codebase structure and organization (multirepo vs monorepo).
+  - Development processes and workflows and tools around them (mainly, Jira, Azure DevOps)
+- Policy differences.
+- Team and organizational differences.
+- Organizational culture differences.
 
 ## Workspace Structure
 
