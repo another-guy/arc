@@ -10,13 +10,39 @@ No globally installed tools assumed beyond Claude Code itself.
 
 ## Installation
 
-Inside the workspace directory where you want arc available, run:
+Arc is published to the Claude Code community marketplace.
+
+**Step 1 — Add the community marketplace** (skip if already added):
 
 ```
-/plugin install https://github.com/another-guy/arc
+/plugin marketplace add anthropics/claude-plugins-community
+```
+
+**Step 2 — Install arc** inside the workspace directory where you want it available:
+
+```
+/plugin install arc
 ```
 
 This installs arc's skills as `/arc:*` commands in the current workspace. The plugin files live in `.claude/commands/arc/` and travel with the workspace (commit or share that directory to distribute arc to teammates).
+
+> **Prefer to install directly from source?**
+> ```
+> /plugin install https://github.com/another-guy/arc
+> ```
+
+**Alternatively, instead of installing from the marketplace, clone the repository** and load the plugin from your local directory:
+
+```sh
+git clone https://github.com/another-guy/arc.git
+
+claude --plugin-dir ./arc
+
+# In Claude Code, load the plugin:
+/reload-plugins
+```
+
+This way is useful for local plugin development or installation without commitment.
 
 ---
 
