@@ -171,6 +171,24 @@ Append an `## Recent Changes` section to relevant KB files noting significant dr
 
 ---
 
+## Update knowledge/CLAUDE.md
+
+After all phases complete, update `knowledge/CLAUDE.md` to reflect the full KB structure. Replace the entire file with:
+
+```
+# Knowledge Base
+
+- Coding standards and conventions → `@knowledge/CODING-STANDARDS.md`
+- Architecture decisions and patterns → `@knowledge/ARCHITECTURE.md`
+- Security guidelines and requirements → `@knowledge/SECURITY.md`
+- Platform repositories and dependency order → `@knowledge/PLATFORM-REPOS.md`
+- Per-repo deep documentation → `knowledge/<product>/` directories
+```
+
+Do not enumerate individual repo articles — the directory structure and `PLATFORM-REPOS.md` serve that role.
+
+---
+
 ## Final report
 
 Print a summary of what was generated:
