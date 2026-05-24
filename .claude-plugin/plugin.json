@@ -1,9 +1,21 @@
 {
   "name": "arc",
+  "displayName": "ARC — Workspace Bootstrap",
   "version": "1.0.2",
   "description": "AI-powered workspace bootstrap for engineers — scaffolds, syncs, and documents multi-repo engineering workspaces.",
   "author": {
-    "name": "Igor Soloydenko"
+    "name": "Igor Soloydenko",
+    "email": "soloydenko@gmail.com"
   },
-  "repository": "https://github.com/another-guy/arc"
+  "repository": "https://github.com/another-guy/arc",
+  "homepage": "https://github.com/another-guy/arc",
+  "license": "MIT",
+  "keywords": [
+    "workspace",
+    "bootstrap",
+    "scaffolding",
+    "engineering",
+    "onboarding",
+    "knowledge-base"
+  ]
 }
