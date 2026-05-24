@@ -91,6 +91,12 @@ Generates a detailed knowledge article for a single repo. Run `/compact` before 
 
 ---
 
+## Maintainers
+
+To cut a release, follow the checklist in `RELEASE.md`.
+
+---
+
 ## Getting help
 
 For a description of every skill — what it does, what it creates, and what it requires — read `SKILLS.md` in this repository:

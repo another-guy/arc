@@ -39,6 +39,10 @@ Run them in this order when onboarding to a new company. See `SKILLS.md` for ful
 4. Reference user input via `$ARGUMENTS` (everything the user types after the command).
 5. Add a row to `SKILLS.md`.
 
+## Releasing
+
+See `RELEASE.md` for the full checklist. The short version: bump the version in `.claude-plugin/plugin.json`, `skills/scaffold/SKILL.md`, and `skills/configure/SKILL.md`; run `claude plugin validate .`; commit; push; tag `vX.Y.Z`.
+
 ## Conventions
 
 - **Frontmatter is required** on every skill file. Missing frontmatter means CC cannot discover the skill.

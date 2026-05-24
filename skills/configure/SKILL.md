@@ -173,7 +173,7 @@ Each configured category follows this shape:
 Example result:
 ```json
 {
-  "arc_version": "1.0",
+  "arc_version": "1.0.2",
   "data_sources": {
     "docs": {
       "type": "confluence",
