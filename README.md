@@ -11,7 +11,7 @@ Designed to work at any company — from an AI-friendly startup to a government 
 Inside the workspace directory where you want arc available, run:
 
 ```
-/plugin install https://github.com/<your-username>/arc
+/plugin install https://github.com/another-guy/arc
 ```
 
 This installs arc's skills as `/arc:*` commands in the current workspace. The plugin files live in `.claude/commands/arc/` and travel with the workspace (commit or share that directory to distribute arc to teammates).
