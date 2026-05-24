@@ -29,10 +29,10 @@ Read the following from the repo. Work through them in order — stop reading ea
 
 **Tier 1 — Always read** (lightweight, high signal):
 - `README.md` (or `README.rst`, `README.adoc`)
-- `CONTRIBUTING.md` if present
+- `CONTRIBUTING.md`, `ARCHITECTURE.md`, `DESIGN.md`, `SECURITY.md` if present at repo root
+- All markdown files in `docs/`, `architecture/`, `rfcs/`, `decisions/`, `adr/`, `design/`, `wiki/` directories — these are the highest-priority source; a human already synthesized them
 - Dependency manifest (`package.json`, `go.mod`, `*.csproj`, `pom.xml`, etc.)
 - Top-level directory listing (names only, not contents)
-- `docs/` directory listing and any `.md` files directly in it
 
 **Tier 2 — Read if context allows** (moderate weight):
 - Entry point file(s): `main.*`, `index.*`, `Program.*`, `app.*`, `server.*`
@@ -85,7 +85,20 @@ What depends on this repo (cross-reference `knowledge/PLATFORM-REPOS.md`).
 ## Known Constraints and Gotchas
 
 Anything non-obvious that would surprise a developer working with this repo: known limitations, historical decisions, fragile areas, or things that look wrong but are intentional.
+
+## Sources
+
+| Source | Type | Notes |
+|--------|------|-------|
+| `repos/<product>/<repo>/docs/ARCHITECTURE.md` | Local doc | |
+| https://... | Confluence | |
+| `repos/<product>/<repo>/src/example.ts:42` | Code | ⚠️ Contradicts design doc above |
 ```
+
+**Rules for the Sources table**:
+- List every source consulted, in the order it was read.
+- Include a code file reference **only** when it is the sole source for a claim, or when it **contradicts** a design document — mark contradictions with ⚠️.
+- Do not cite code for things already covered by a doc.
 
 ---
 

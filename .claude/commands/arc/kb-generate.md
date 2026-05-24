@@ -73,39 +73,68 @@ Generate each of the three workspace KB files. Write each file to disk immediate
 
 **Context discipline**: do not read full source files in this phase. Read README.md files, top-level directory listings, and manifest files only. Full source reading is reserved for `arc:kb-repo`.
 
+### Local document discovery (run once before 2a–2c)
+
+Before querying any external source, scan all repos for existing human-written documentation. These are the highest-priority source — a human already synthesized them.
+
+Look for:
+- Directories named `docs/`, `architecture/`, `rfcs/`, `decisions/`, `adr/`, `design/`, `wiki/`
+- Root-level markdown files beyond README: `ARCHITECTURE.md`, `CONTRIBUTING.md`, `DESIGN.md`, `SECURITY.md`, `CODING-STANDARDS.md`, `GUIDELINES.md`, and similar
+- Any committed wiki exports (large `.md` files or collections of markdown in a docs dir)
+
+Record every discovered file path. Use these as the primary input for phases 2a–2c before reaching out to Confluence or synthesizing from code.
+
+### Sources format
+
+Every KB file must end with a `## Sources` section — a table listing every source consulted. This makes the KB auditable and traceable.
+
+```markdown
+## Sources
+
+| Source | Type | Notes |
+|--------|------|-------|
+| `repos/platform/auth-service/docs/ARCHITECTURE.md` | Local doc | Primary source |
+| https://company.atlassian.net/wiki/spaces/PLAT/... | Confluence | Auth design |
+| `repos/platform/auth-service/src/tokens/validator.ts:142` | Code | ⚠️ Contradicts Confluence doc above |
+```
+
+**Code references in the Sources table**:
+- Include a code reference **only** when the code is the sole source (no design doc exists) or when the code **contradicts** a design or guideline document.
+- Mark contradictions with ⚠️ in the Notes column and cross-reference the conflicting source.
+- Do not cite code as a source for things that are already covered by a doc.
+
 ### 2a — ARCHITECTURE.md
 
-Primary source: `data_sources.docs` (Confluence or configured wiki).
+Source priority order:
+1. Local markdown docs discovered above (ADRs, design docs, architecture notes in repos)
+2. `data_sources.docs` (Confluence or configured wiki) — if configured via MCP, query for architecture decision records and system design docs; if via CLI, run the CLI tool to fetch the same
+3. README files across repos + dependency graph from Phase 1 (if no docs source configured)
 
-If docs source is configured via MCP: query for architecture decision records, system design documents, and high-level diagrams. Summarize the key architectural patterns, boundaries, and decisions.
+Synthesize into a summary of key architectural patterns, boundaries, and decisions. Note where codebase structure confirms or contradicts the documented architecture.
 
-If docs source is configured via CLI: run the CLI tool to fetch the same content.
-
-If no docs source configured: derive architecture from README files across repos and the dependency graph from Phase 1.
-
-Enrich with codebase signals: note where the actual repo structure confirms or contradicts the documented architecture.
-
-Write `knowledge/ARCHITECTURE.md`.
+Write `knowledge/ARCHITECTURE.md` with a `## Sources` table at the bottom.
 
 ### 2b — CODING-STANDARDS.md
 
-Primary source: codebase (observed patterns).
-
-Read from each product's repos: README, any `CONTRIBUTING.md` or `docs/` directory, linter config files (`.eslintrc`, `.editorconfig`, `pylintrc`, `StyleCop.json`, etc.).
+Source priority order:
+1. Local markdown docs: `CONTRIBUTING.md`, `CODING-STANDARDS.md`, `GUIDELINES.md`, and similar files discovered above
+2. Linter and formatter config files (`.eslintrc`, `.editorconfig`, `pylintrc`, `StyleCop.json`, `.prettierrc`, etc.)
+3. `data_sources.docs` — if the wiki has written standards, cross-reference and note any divergence from what is observed in code
+4. Codebase patterns (observed from README and directory structure) — use as a reality check, not the primary source
 
 Synthesize the actual coding conventions in use: naming, structure, test patterns, error handling style, dependency injection approach, etc.
 
-If docs source has written standards: cross-reference and note any divergence.
-
-Write `knowledge/CODING-STANDARDS.md`.
+Write `knowledge/CODING-STANDARDS.md` with a `## Sources` table at the bottom.
 
 ### 2c — SECURITY.md
 
-Primary source: docs source (security policies, compliance requirements) + codebase (auth patterns, secret handling, input validation patterns observed).
+Source priority order:
+1. Local markdown docs: any `SECURITY.md`, threat model docs, compliance notes discovered above
+2. `data_sources.docs` — security policies, compliance requirements
+3. Codebase patterns: auth patterns, secret handling, input validation (use code references in Sources only when they reveal something not covered by docs, or when they contradict documented policy)
+4. `data_sources.tickets` (if configured) — security-related tickets or known vulnerabilities
 
-If tickets source is configured: query for security-related tickets or known vulnerabilities to include as context.
-
-Write `knowledge/SECURITY.md`.
+Write `knowledge/SECURITY.md` with a `## Sources` table at the bottom.
 
 **Context check**: after writing all three workspace KB files, evaluate context. Recommend `/compact` if needed before continuing.
 
