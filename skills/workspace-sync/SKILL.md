@@ -75,7 +75,7 @@ If `repos/<product>/` exists but has no `CLAUDE.md`, create the stub above.
 
 Print the results table. Sort rows in this fixed order: ✅ Cloned → 🔄 Synced → ⚠️ Skipped → ❌ Failed.
 
-| Status | Repo | Reason |
+| Status | Repo | Comment |
 |--------|------|--------|
 | ✅ Cloned | `/repos/<product>/<name>` | |
 | 🔄 Synced | `/repos/<product>/<name>` | |

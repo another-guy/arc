@@ -133,7 +133,7 @@ repos/**/*.log
 **`arc.config.json`**
 ```json
 {
-  "arc_version": "1.0.0",
+  "arc_version": "1.0.1",
   "data_sources": {}
 }
 ```
