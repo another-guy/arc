@@ -5,7 +5,9 @@ Arc is a portable Claude Code plugin that bootstraps and maintains engineering w
 ## Project structure
 
 ```
-.claude/commands/arc/   ← all arc skills (slash commands)
+.claude-plugin/
+  plugin.json           ← plugin manifest (name, version, description, author, repository)
+skills/                 ← all arc skills (slash commands)
 project-arc.md          ← original design document
 WORKSPACE_STRUCTURE.md  ← structure arc creates in a workspace
 SKILLS.md               ← user-facing skills catalog
@@ -25,7 +27,7 @@ Run them in this order when onboarding to a new company. See `SKILLS.md` for ful
 
 ## Adding a new skill
 
-1. Create `.claude/commands/arc/<skill-name>.md`.
+1. Create `skills/<skill-name>.md`.
 2. Open with YAML frontmatter — CC requires it for discovery:
    ```yaml
    ---
