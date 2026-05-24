@@ -1,6 +1,6 @@
 {
   "name": "arc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "AI-powered workspace bootstrap for engineers — scaffolds, syncs, and documents multi-repo engineering workspaces.",
   "author": {
     "name": "Igor Soloydenko"

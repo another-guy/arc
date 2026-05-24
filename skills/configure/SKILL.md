@@ -5,6 +5,11 @@ description: Interactively configure data sources (docs, tickets, code hosting) 
 
 Configure data sources for this ARC workspace. Works through three categories — **docs**, **tickets**, **code_hosting** — and sets up either an MCP server or CLI tool for each. Updates `arc.config.json`, `.env.arc`, and `.claude/settings.local.json` as needed.
 
+**AskUserQuestion constraints (hard limits):**
+- Every question must have **2–4 explicit options** — no fewer, no more.
+- The tool always appends a free-text "Other" entry automatically; use that for any unlisted tool.
+- Never create a question with only one option.
+
 ## Before you start
 
 1. Read `arc.config.json`. If `data_sources` already has entries, tell the user which categories are already configured and ask whether to skip or reconfigure each one.
@@ -20,29 +25,23 @@ Work through the three categories in this order: **docs**, **tickets**, **code_h
 
 Ask the user which tool they use for this category. Present the options below. Accept free-text input for "Other".
 
-**docs:**
+**docs** (max 4 options; "Other" is added automatically for anything not listed):
 1. Confluence
 2. Notion
-3. SharePoint
-4. Local markdown files (no auth needed)
-5. Other
-6. Skip (no documentation source)
+3. Local markdown files (no auth needed)
+4. Skip (no documentation source)
 
-**tickets:**
+**tickets** (max 4 options):
 1. Jira
 2. Azure DevOps
 3. GitHub Issues
-4. Linear
-5. Other
-6. Skip (no ticket source)
+4. Skip (no ticket source)
 
-**code_hosting:**
+**code_hosting** (max 4 options):
 1. GitHub
 2. GitLab
 3. Azure DevOps Repos
-4. Bitbucket
-5. Other
-6. Skip
+4. Skip
 
 If the user chooses **Skip**: record `{ "type": "none" }` for this category in `arc.config.json` and move to the next category.
 
@@ -131,8 +130,10 @@ Ask for: base URL (leave default `https://gitlab.com/api/v4` for cloud).
 2. Offer PAT setup with this tool-specific prompt (fill in TOOL, CLI_TOOL, and AUTH_COMMAND from the table below):
    > "If you don't have native auth configured for `[CLI_TOOL]` (e.g. `[AUTH_COMMAND]`), you'll need a PAT. Want to add one now?"
 
-   If user says **yes**: ask for the token value and add it to `.env.arc` using the env var name from the table.
-   If user says **no**: continue — note in the final summary that native auth must be configured before running `arc:workspace-sync` or `arc:kb-generate`.
+   If user says **yes**: ask for the token value using a 2-option question:
+   - Option 1: "Paste token" — tell the user to type their token into the Other/free-text field, then read the value from that field.
+   - Option 2: "Skip for now" — note in the final summary that native auth must be configured before running `arc:workspace-sync` or `arc:kb-generate`.
+   If user says **no**: same as "Skip for now" above.
 
 **CLI tool reference:**
 

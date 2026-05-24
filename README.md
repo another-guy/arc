@@ -1,7 +1,9 @@
 # ARC — AI-Powered Workspace Bootstrap for Engineers
 
 Arc is a [Claude Code](https://claude.ai/code) plugin that turns a blank directory into a fully-scaffolded engineering workspace in minutes.
+
 It clones your repositories, builds a knowledge base from your docs, wikis, and codebase, and maintains that context as your understanding of the system grows.
+
 No globally installed tools assumed beyond Claude Code itself.
 
 ---
