@@ -1,6 +1,11 @@
 {
 	"name": "@claude-code-plugin-arc/cli",
+	"scripts": {
+		"build": "tsdown",
+		"tsdown": "tsdown"
+	},
 	"devDependencies": {
+		"@types/node": "^25.9.1",
 		"tsdown": "^0.22.0",
 		"typescript": "^6.0.3"
 	}
