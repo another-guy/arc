@@ -1,36 +1,95 @@
 # TODO List
 
+## Rename existing skills
+
+Apply the `<entity>-<action>` naming convention to existing commands:
+
+- [ ] `/arc:scaffold` → `/arc:workspace-scaffold`
+- [ ] `/arc:configure` → `/arc:workspace-configure`
+- [ ] `/arc:kb-repo` → `/arc:kb-repo-generate`
+
+(`/arc:workspace-sync` and `/arc:kb-generate` already follow the convention — no change needed.)
+
 ## Add more skills that will be useful long-term
 
-- [ ] `/arc:review-comprehensive`. Custom code review. Focus on thorough, multifaceted review.
-- [ ] Lower priority — specialized review commands, some of which can be used in `/arc:review-comprehensive`.
+### Naming convention
+
+All skills follow `/arc:<entity>-<action>`. Namespaces come in mutating/read-only pairs where applicable:
+
+| Mutating | Read-only |
+|----------|-----------|
+| `kb-*` | `overview-*` |
+| `code-*` | `analyze-*` |
+| — | `review-*` |
+
+Full namespace reference:
+
+| Namespace     | Intent                                                             |
+| ------------- | ------------------------------------------------------------------ |
+| `workspace-*` | Workspace-level setup and discovery                                |
+| `kb-*`        | Knowledge base generation and mutation                             |
+| `overview-*`  | Read-only navigation of the existing KB                            |
+| `code-*`      | Mutating operations on code                                        |
+| `analyze-*`   | Read-only factual analysis of code (structure, behavior, meaning)  |
+| `review-*`    | Read-only code review — quality judgment (no open PR assumed)      |
+| `workplan-*`  | Work planning artifacts and actions                                |
+| `pr-*`        | Reserved — future remote PR-specific skills (GitHub, ADO)          |
+
+---
+
+### workspace-*
+
+- [ ] `/arc:workspace-whats-new` — Summarize recent activity across all repos (commits, tickets, doc changes) without consulting the KB. General discovery.
+
+### kb-*
+
+- [ ] `/arc:kb-update` — Update the knowledge base with new information from repos, docs, and ticket tracker. May add a `sources` field to each KB entry to track provenance and priority.
+- [ ] `/arc:kb-whats-new` — Summarize what changed in the KB since the last `/arc:kb-update` run.
+- [ ] `/arc:kb-query` — Answer a natural language question by querying the knowledge base (e.g. "How do I set up my dev environment?", "Who owns the auth service?").
+
+### overview-*
+
+- [ ] `/arc:overview-products` — Overview of current products, their status, and key information. Useful for new hires.
+- [ ] `/arc:overview-process` — Overview of key company processes (release, incident response, etc.) from the KB.
+- [ ] `/arc:overview-glossary` — Glossary of important terms, acronyms, and jargon from the KB.
+- [ ] `/arc:overview-team` — Overview of team structure, roles, and responsibilities from the KB.
+
+### code-*
+
+- [ ] `/arc:code-implement` — Implement a feature in small, incremental pieces. Keeps each change contained and easy to review (manages reviewer's cognitive load).
+- [ ] `/arc:code-refactor` — Refactor code for improved structure, readability, or performance.
+- [ ] `/arc:code-debug` — Identify potential issues in code and suggest fixes.
+- [ ] `/arc:code-optimize` — Optimize code for performance or efficiency.
+- [ ] `/arc:code-document` — Generate or update inline documentation for a piece of code.
+
+### analyze-*
+
+- [ ] `/arc:analyze-explain` — Explain what a piece of code does in natural language.
+- [ ] `/arc:analyze-summarize` — Produce a high-level summary of what a piece of code does.
+
+### review-*
+
+- [ ] `/arc:review-comprehensive` — Thorough, multifaceted code review. Orchestrates the specialized reviews below.
+- [ ] Lower priority — specialized review sub-skills (can feed into `/arc:review-comprehensive`):
   - [ ] `/arc:review-functionality-and-correctness`
   - [ ] `/arc:review-design-and-architecture`
   - [ ] `/arc:review-readability-and-maintainability`
   - [ ] `/arc:review-security`
   - [ ] `/arc:review-performance`
+  - [ ] `/arc:review-accessibility`
   - [ ] `/arc:review-compliance-and-best-practices`
   - [ ] `/arc:review-documentation`
   - [ ] `/arc:review-tests-and-coverage`
-- [ ] `/arc:work-feature` Custom "implement feature". Focus on incremental implementation in very small pieces. Ensure the resulting change is contained and easy to review (manage reviewer's cognitive load).
-- [ ] `/arc:work-plan` Potentially, a supporting skill to generate a work plan for `/arc:work-feature` — break a feature into small, incremental steps that can be implemented and reviewed one at a time. Maybe create subtasks in the task/ticket tracker.
-- [ ] `/arc:kb-update-maintain` Update the knowledge base with new information from the repositories, documentation, and ticket tracker. Maybe also add a "source" field to each KB entry so we can track where the information came from and prioritize some sources over others when generating answers.
-- [ ] `/arc:kb-query` Query the knowledge base with a natural language question. Retrieve relevant information from the KB and use it to answer the question. This could be used for things like "How do I set up my dev environment?" or "What's the process for requesting time off?" or "Who should I talk to about X?".
-- [ ] `/arc:whats-new` Generate a summary of recent changes across the repositories, documentation, and ticket tracker. Useful for keeping up with what's happening in the company.
-- [ ] `/arc:overview-product` Generate an overview of the current products, their status, and key information about them. Useful for new hires or anyone trying to understand what the company is working on.
-- [ ] `/arc:overview-process` Generate an overview of key company processes (e.g. release process, incident response process, etc.) based on information from the KB and other sources. Useful for new hires or anyone trying to understand how things get done at the company.
-- [ ] `/arc:overview-glossary` Generate a glossary of important terms, acronyms, and jargon used in the company. Useful for new hires or anyone trying to understand the language of the company.
-- [ ] `/arc:docs-generate` Generate documentation for a repository or project based on the code, comments, and other information available. Useful for improving documentation and making it easier for people to understand the codebase.
-- [ ] `/arc:tests-generate` Generate tests for a repository or project based on the code, comments, and other information available. Useful for improving test coverage and ensuring code quality.
-- [ ] `/arc:tasks-generate` Generate tasks or tickets for a repository or project based on the code, comments, and other information available. Useful for identifying work that needs to be done and creating actionable items for the team.
-- [ ] `/arc:code-explain` Explain a piece of code in natural language. Useful for understanding complex code or onboarding new team members.
-- [ ] `/arc:code-summarize` Summarize a piece of code in natural language. Useful for getting a high-level understanding of what a piece of code does without having to read through all the details.
-- [ ] `/arc:code-compare` Compare two pieces of code and explain the differences in natural language. Useful for understanding changes between two versions of code or comparing different implementations of the same functionality.
-- [ ] `/arc:code-refactor` Refactor a piece of code to improve its structure, readability, or performance. Useful for maintaining code quality and ensuring the codebase remains healthy over time.
-- [ ] `/arc:code-debug` Debug a piece of code by identifying potential issues and suggesting fixes. Useful for troubleshooting problems in the codebase and improving overall code quality.
-- [ ] `/arc:code-optimize` Optimize a piece of code for better performance or efficiency. Useful for improving the performance of the codebase and ensuring it runs smoothly.
-- [ ] `/arc:code-document` Generate documentation for a piece of code based on its structure, comments, and other information available. Useful for improving code documentation and making it easier for people to understand the codebase.
-- [ ] `/arc:overview-team` Generate an overview of the team structure, roles, and responsibilities based on information from the KB and other sources. Useful for new hires or anyone trying to understand how the company is organized.
+
+### workplan-*
+
+- [ ] `/arc:workplan-generate` — Break a feature into small, incremental implementation steps. Optionally creates subtasks in the configured ticket tracker.
+
+### Artifact generation (no namespace conflict)
+
+- [ ] `/arc:docs-generate` — Generate documentation for a repo or project from code, comments, and available context.
+- [ ] `/arc:tests-generate` — Generate tests for a repo or project from code and available context.
+- [ ] `/arc:tasks-generate` — Generate tasks or tickets from code and context. Useful for surfacing work that needs to be done.
 
 ## ✅ Ensure plugin structure
 
@@ -74,11 +133,11 @@ Look into /arc:configure, but ask Claude Code to check other places too.
   The errors:
 
     Which tool do you use for documentation?
-    ⎿  Invalid tool parameters
+    ⎿  Invalid tool parameters
 
-  ● User answered Claude's questions:
-    ⎿  · Do you want to add a GitHub Personal Access Token to .env.arc now? → Yes, add PAT now
-    ⎿  Invalid tool parameters
+  ● User answered Claude's questions:
+    ⎿  · Do you want to add a GitHub Personal Access Token to .env.arc now? → Yes, add PAT now
+    ⎿  Invalid tool parameters
 
 ● Both errors were InputValidationError from the AskUserQuestion tool — I violated its schema constraints in two different
   directions:
